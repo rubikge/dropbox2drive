@@ -81,10 +81,23 @@ We use `tmux` to ensure the process keeps running even if you disconnect from SS
 
 ### Step 6: Monitor & Finish
 To check progress later:
-1.  Select account/project and authenticate: `gcloud config set account ACCOUNT_EMAIL` && `gcloud config set project PROJECT_ID` && `gcloud auth login`
-2.  SSH back in and attach: `gcloud compute ssh dropbox-migration-vm --zone=us-central1-a --command="tmux attach -t migration"`
 
-Once finished, **delete the VM** to avoid any potential lingering costs:
-```bash
-gcloud compute instances delete dropbox-migration-vm --zone=us-central1-a
-```
+1.  Select account/project and authenticate. To see what's available:
+    ```bash
+    gcloud auth list
+    gcloud config set account ACCOUNT_EMAIL
+
+    gcloud projects list
+    gcloud config set project PROJECT_ID
+    
+    gcloud auth login
+    ```
+2.  SSH back in and attach:
+    ```bash
+    gcloud compute ssh dropbox-migration-vm --zone=us-central1-a --command="tmux attach -t migration"
+    ```
+
+3.  Once finished, **delete the VM** to avoid any potential lingering costs:
+    ```bash
+    gcloud compute instances delete dropbox-migration-vm --zone=us-central1-a
+    ```
